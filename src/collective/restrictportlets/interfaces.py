@@ -3,7 +3,6 @@
 
 from collective.restrictportlets import _
 from plone.portlets.interfaces import IPortletType
-from plone.registry import field
 from zope import schema
 from zope.component import getUtilitiesFor
 from zope.interface import implementer
@@ -32,14 +31,15 @@ PortletTypesVocabularyFactory = PortletTypesVocabulary()
 class ISettings(Interface):
     """Settings for restricted portlets"""
 
-    restricted = field.List(
+    restricted = schema.List(
         title=_(u'Restricted portlets'),
         description=_(
             u'description_restricted_portlets',
             default=u'Select portlets that should only be '
                     u'available for Managers.'),
-        value_type=field.Choice(
+        value_type=schema.Choice(
             title=u'Portlet name',
             vocabulary='collective.restrictportlets.portlet_types',
         ),
+        default=['portlets.Login', 'portlets.Classic'],
     )
