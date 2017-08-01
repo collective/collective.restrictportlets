@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Buildout Eggs" type="python">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/lib/python2.7/site-packages" />
+      <root url="file://$USER_HOME$/shared-eggs/setuptools-24.3.0-py2.7.egg" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

@@ -18,8 +18,10 @@ src/*
 test.plone_addon/
 var/
 # files
+.idea/workspace.xml
 .installed.cfg
 .mr.developer.cfg
+.Python
 lib64
 log.html
 output.xml
