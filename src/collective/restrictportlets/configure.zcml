@@ -12,7 +12,7 @@
   <include package=".browser" />
 
   <utility
-    component=".interfaces.portlet_types_vocabulary"
+    component=".interfaces.PortletTypesVocabularyFactory"
     name="collective.restrictportlets.portlet_types"
     />
 

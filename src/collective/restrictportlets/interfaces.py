@@ -3,9 +3,11 @@
 
 from collective.restrictportlets import _
 from plone.portlets.interfaces import IPortletType
+from plone.registry import field
 from zope import schema
 from zope.component import getUtilitiesFor
-from zope.interface import Interface, implementer, provider
+from zope.interface import implementer
+from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
@@ -13,27 +15,32 @@ class ICollectiveRestrictportletsLayer(IDefaultBrowserLayer):
     """Marker interface that defines a browser layer."""
 
 
-@provider(schema.interfaces.IBaseVocabulary)
-def portlet_types_vocabulary(context):
-    # The standard portlet managers check if a portlet is registered
-    # for the manager interface.  For the vocabulary we do not want
-    # this restriction.
-    addable = [p.addview for p in getUtilitiesFor(IPortletType)]
-    return schema.vocabulary.SimpleVocabulary.fromValues(addable)
+@implementer(schema.interfaces.IVocabularyFactory)
+class PortletTypesVocabulary(object):
+
+    def __call__(self, context):
+        # Get all portlets, for all portlet manager interfaces.
+        add_views = [
+            portlet.addview for (name, portlet) in
+            getUtilitiesFor(IPortletType)]
+        return schema.vocabulary.SimpleVocabulary.fromValues(add_views)
+
+
+PortletTypesVocabularyFactory = PortletTypesVocabulary()
 
 
 class ISettings(Interface):
     """Settings for restricted portlets"""
 
-    restricted = schema.List(
+    restricted = field.List(
         title=_(u'Restricted portlets'),
         description=_(
             u'description_restricted_portlets',
             default=u'Select portlets that should only be '
                     u'available for Managers.'),
-        value_type=schema.Choice(
+        value_type=field.Choice(
             title=u'Portlet name',
             vocabulary='collective.restrictportlets.portlet_types',
         ),
-        default=['portlets.Login', 'portlets.Classic'],
+        # default=['portlets.Login', 'portlets.Classic'],
     )

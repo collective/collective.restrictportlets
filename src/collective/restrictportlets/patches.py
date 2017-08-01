@@ -9,5 +9,6 @@ def getAddablePortletTypes(self):
         restricted = api.portal.get_registry_record(
             name='restricted', interface=ISettings
         )
-        result = [p for p in result if p.addview not in restricted]
+        if restricted:
+            result = [p for p in result if p.addview not in restricted]
     return result
