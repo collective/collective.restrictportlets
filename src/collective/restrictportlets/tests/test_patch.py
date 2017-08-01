@@ -43,6 +43,8 @@ class TestPatch(unittest.TestCase):
 
     def test_member_sees_some_portlets(self):
         # Some portlets are no longer addable for non-managers.
+        # Explicitly set roles to Member. Somehow needed on Plone 4.3.
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
         addable = self.manager.getAddablePortletTypes()
         add_views = [p.addview for p in addable]
         self.assertIn('portlets.News', add_views)
