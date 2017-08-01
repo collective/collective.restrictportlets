@@ -1,4 +1,10 @@
 <?xml version="1.0"?>
 <registry>
   <records interface="collective.restrictportlets.interfaces.ISettings" />
+  <record interface="collective.restrictportlets.interfaces.ISettings" field="restricted">
+    <value>
+      <element>portlets.Login</element>
+      <element>portlets.Classic</element>
+    </value>
+  </record>
 </registry>
