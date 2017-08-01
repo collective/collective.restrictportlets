@@ -11,6 +11,11 @@
 
   <include package=".browser" />
 
+  <utility
+    component=".interfaces.portlet_types_vocabulary"
+    name="collective.restrictportlets.portlet_types"
+    />
+
   <monkey:patch
       description="Restrict addable portlet types"
       class="plone.portlets.manager.PortletManager"
