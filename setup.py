@@ -21,7 +21,9 @@ setup(
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Plone",
+        "Framework :: Plone :: 4.3",
         "Framework :: Plone :: 5.0",
+        "Framework :: Plone :: 5.1",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
         "Operating System :: OS Independent",
@@ -38,6 +40,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'collective.monkeypatcher',
         'plone.api',
         'Products.GenericSetup>=1.8.2',
         'setuptools',
