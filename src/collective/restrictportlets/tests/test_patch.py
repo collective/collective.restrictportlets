@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+from collective.restrictportlets.interfaces import ISettings
 from collective.restrictportlets.testing import COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING  # noqa
+from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletManager
@@ -37,4 +39,19 @@ class TestPatch(unittest.TestCase):
         self.assertIn('portlets.News', add_views)
         self.assertNotIn('portlets.Classic', add_views)
         self.assertNotIn('portlets.Login', add_views)
+        self.assertIn('plone.portlet.static.Static', add_views)
+
+    def test_member_sees_different_portlets(self):
+        # Test restricting different portlets than the default.
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        api.portal.set_registry_record(
+            name='restricted', value=['portlets.News'],
+            interface=ISettings
+        )
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        addable = self.manager.getAddablePortletTypes()
+        add_views = [p.addview for p in addable]
+        self.assertNotIn('portlets.News', add_views)
+        self.assertIn('portlets.Classic', add_views)
+        self.assertIn('portlets.Login', add_views)
         self.assertIn('plone.portlet.static.Static', add_views)
