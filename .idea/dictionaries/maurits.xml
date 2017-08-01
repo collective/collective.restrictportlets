@@ -2,6 +2,7 @@
   <dictionary name="maurits">
     <words>
       <w>leftcolumn</w>
+      <w>noqa</w>
       <w>plone</w>
       <w>portlets</w>
       <w>restrictportlets</w>
