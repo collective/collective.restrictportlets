@@ -18,4 +18,11 @@
       directory="static"
       />
 
+  <browser:page
+    name="restrict-portlets-controlpanel"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="cmf.ManagePortal"
+    class=".controlpanel.ControlPanelView"
+    />
+
 </configure>
