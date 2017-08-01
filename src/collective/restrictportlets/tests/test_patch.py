@@ -22,6 +22,13 @@ class TestPatch(unittest.TestCase):
         self.portal = self.layer['portal']
         self.manager = getUtility(IPortletManager, name='plone.leftcolumn')
 
+    def test_default_setting(self):
+        self.assertEqual(
+            api.portal.get_registry_record(
+                name='restricted', interface=ISettings),
+            ['portlets.Classic', 'portlets.Login']
+        )
+
     def test_manager_sees_all_portlets(self):
         # Portlets should remain addable if nothing has been changed.
         # We do not check them all, because the list may be different in

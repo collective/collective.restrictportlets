@@ -41,5 +41,5 @@ class ISettings(Interface):
             title=u'Portlet name',
             vocabulary='collective.restrictportlets.portlet_types',
         ),
-        default=['portlets.Login', 'portlets.Classic'],
+        default=['portlets.Classic', 'portlets.Login'],
     )
