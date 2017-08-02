@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from plone import api
 from collective.restrictportlets.testing import COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING  # noqa
+from plone import api
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.portlets.interfaces import IPortletManager
+from zope.component import getUtility
 
 import unittest
 
@@ -53,3 +57,14 @@ class TestUninstall(unittest.TestCase):
         self.assertNotIn(
            ICollectiveRestrictportletsLayer,
            utils.registered_layers())
+
+    def test_member_sees_all_portlets_after_uninstall(self):
+        # Explicitly set roles to Member. Somehow needed on Plone 4.3.
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+        manager = getUtility(IPortletManager, name='plone.leftcolumn')
+        addable = manager.getAddablePortletTypes()
+        add_views = [p.addview for p in addable]
+        self.assertIn('portlets.News', add_views)
+        self.assertIn('portlets.Classic', add_views)
+        self.assertIn('portlets.Login', add_views)
+        self.assertIn('plone.portlet.static.Static', add_views)
