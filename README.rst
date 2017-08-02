@@ -16,6 +16,8 @@ Features
 
 - There is a control panel for selecting which portlets to disallow for non-Managers.
 
+.. image:: https://raw.githubusercontent.com/collective/collective.restrictportlets/master/docs/controlpanel.png
+
 
 Compatibility
 -------------
