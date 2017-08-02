@@ -34,6 +34,15 @@ The most important part of this package is a small `monkey patch <https://github
 If you have other code that patches this, it may not work.
 
 
+Testing
+-------
+
+This package is tested with Travis:
+
+.. image:: https://secure.travis-ci.org/collective/collective.restrictportlets.png
+    :target: http://travis-ci.org/collective/collective.restrictportlets
+
+
 Default
 -------
 
