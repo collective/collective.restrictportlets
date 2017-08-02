@@ -2,6 +2,7 @@
 """Module where all interfaces, events and exceptions live."""
 
 from collective.restrictportlets import _
+from plone import api
 from plone.portlets.interfaces import IPortletType
 from zope import schema
 from zope.component import getUtilitiesFor
@@ -19,10 +20,14 @@ class PortletTypesVocabulary(object):
 
     def __call__(self, context):
         # Get all portlets, for all portlet manager interfaces.
-        add_views = [
-            portlet.addview for (name, portlet) in
-            getUtilitiesFor(IPortletType)]
-        return schema.vocabulary.SimpleVocabulary.fromValues(add_views)
+        portlets = [
+            schema.vocabulary.SimpleVocabulary.createTerm(
+                portlet.addview,  # value
+                portlet.addview,  # token
+                api.portal.translate(portlet.title)  # title
+            ) for (name, portlet)
+            in getUtilitiesFor(IPortletType)]
+        return schema.vocabulary.SimpleVocabulary(portlets)
 
 
 PortletTypesVocabularyFactory = PortletTypesVocabulary()
