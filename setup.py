@@ -42,6 +42,7 @@ setup(
     install_requires=[
         'collective.monkeypatcher',
         'plone.api',
+        'plone.app.registry',
         'Products.GenericSetup',
         'setuptools',
     ],

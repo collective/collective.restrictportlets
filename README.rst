@@ -6,33 +6,50 @@
 collective.restrictportlets
 ===========================
 
-Tell me what your product does
+This packages allows you to restrict the available portlets that non-Managers can add.
 
 Features
 --------
 
-- Can be bullet points
+- On any page where portlets can be added, the product checks a list of portlets that are restricted to only Managers.
+  This includes the personal dashboard.
+
+- There is a control panel for selecting which portlets to disallow for non-Managers.
 
 
-Examples
---------
-
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
-
-
-Documentation
+Compatibility
 -------------
 
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
+This package is tested on Plone 4.3 and 5.0.
+
+It should be fine for Plone 4.1 and 4.2 as well:
+
+- It patches a method from ``plone.portlets`` that has not changed since version 2.0 (Plone 4.0).
+
+- We need ``plone.app.registry`` for our setting and the control panel, so this means Plone 4.1.
+
+The most important part of this package is a small `monkey patch <https://github.com/collective/collective.restrictportlets/blob/master/src/collective/restrictportlets/patches.py>`_ for ``plone.portlets.manager.PortletManager.getAddablePortletTypes``.
+If you have other code that patches this, it may not work.
+
+
+Default
+-------
+
+After you install the product in the Plone add-ons control panel, by default these portlets are restricted:
+
+- Classic portlet
+
+- Login portlet
+
+You can make them available again in the *Restrict portlets* control panel.
 
 
 Translations
 ------------
 
-This product has been translated into
+This product has been translated into:
 
-- Klingon (thanks, K'Plai)
+- Dutch (Maurits van Rees)
 
 
 Installation
@@ -48,7 +65,8 @@ Install collective.restrictportlets by adding it to your buildout::
         collective.restrictportlets
 
 
-and then running ``bin/buildout``
+and then running ``bin/buildout``.
+Now you can activate it in the add-ons control panel and configure it in the *Restrict portlets* control panel.
 
 
 Contribute
@@ -56,17 +74,20 @@ Contribute
 
 - Issue Tracker: https://github.com/collective/collective.restrictportlets/issues
 - Source Code: https://github.com/collective/collective.restrictportlets
-- Documentation: https://docs.plone.org/foo/bar
-
-
-Support
--------
-
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
 
 
 License
 -------
 
 The project is licensed under the GPLv2.
+
+
+Sponsorship
+-----------
+
+Work on collective.restrictportlets has been made possible by The Flemish Environment Agency, or VMM.
+See https://www.vmm.be.
+VMM operates as an agency of the Flemish government for a better environment in Flanders.
+Flanders is one of the three Belgian regions with its own government, parliament and administration.
+The other two are the Brussels-Capital Region and the Walloon Region.
+
