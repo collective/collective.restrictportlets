@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-08-01 19:35+0000\n"
+"POT-Creation-Date: 2017-08-03 13:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,10 +23,11 @@ msgstr ""
 
 #: ../controlpanel.py:16
 #: ../profiles/default/controlpanel.xml
+#: ../profiles/uninstall/controlpanel.xml
 msgid "Restrict portlets"
 msgstr ""
 
-#: ../interfaces.py:35
+#: ../interfaces.py:40
 msgid "Restricted portlets"
 msgstr ""
 
@@ -42,7 +43,7 @@ msgstr ""
 msgid "collective.restrictportlets (uninstall)"
 msgstr ""
 
-#. Default: "Select portlets that should only be available for Managers."
-#: ../interfaces.py:36
+#. Default: "Select portlets that are hidden from normal users in the manage portlets drop down menu. Restricted portlets are still available for Managers. Please note this is not a security feature, it only unclutters the add portlet menu. No permission checks are done: users who know the exact url to the portlet add form can still add restricted portlets. Normal users can also edit restricted portlets already created in the site."
+#: ../interfaces.py:41
 msgid "description_restricted_portlets"
 msgstr ""

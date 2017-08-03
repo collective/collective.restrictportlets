@@ -40,8 +40,14 @@ class ISettings(Interface):
         title=_(u'Restricted portlets'),
         description=_(
             u'description_restricted_portlets',
-            default=u'Select portlets that should only be '
-                    u'available for Managers.'),
+            default=u'Select portlets that are hidden from normal users in the '
+                    u'manage portlets drop down menu. Restricted portlets are '
+                    u'still available for Managers. Please note this is not a '
+                    u'security feature, it only unclutters the add portlet menu. '
+                    u'No permission checks are done: users who know the exact '
+                    u'url to the portlet add form can still add restricted '
+                    u'portlets. Normal users can also edit restricted '
+                    u'portlets already created in the site.'),
         value_type=schema.Choice(
             title=u'Portlet name',
             vocabulary='collective.restrictportlets.portlet_types',
