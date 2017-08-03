@@ -29,6 +29,3 @@ after_success:
   - bin/createcoverage
   - pip install coveralls
   - coveralls
-notifications:
-  email:
-    - m.van.rees@zestsoftware.nl
