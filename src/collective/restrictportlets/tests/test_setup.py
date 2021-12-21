@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Setup tests for this package."""
-from collective.restrictportlets.testing import COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING  # noqa
+from collective.restrictportlets.testing import (
+    COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING,
+)  # noqa
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -22,17 +24,18 @@ class TestSetup(unittest.TestCase):
 
     def test_product_installed(self):
         """Test if collective.restrictportlets is installed."""
-        self.assertTrue(self.installer.isProductInstalled(
-            'collective.restrictportlets'))
+        self.assertTrue(
+            self.installer.isProductInstalled('collective.restrictportlets')
+        )
 
     def test_browserlayer(self):
         """Test that ICollectiveRestrictportletsLayer is registered."""
         from collective.restrictportlets.interfaces import (
-            ICollectiveRestrictportletsLayer)
-        from plone.browserlayer import utils
-        self.assertIn(
             ICollectiveRestrictportletsLayer,
-            utils.registered_layers())
+        )
+        from plone.browserlayer import utils
+
+        self.assertIn(ICollectiveRestrictportletsLayer, utils.registered_layers())
 
 
 class TestUninstall(unittest.TestCase):
@@ -46,17 +49,18 @@ class TestUninstall(unittest.TestCase):
 
     def test_product_uninstalled(self):
         """Test if collective.restrictportlets is cleanly uninstalled."""
-        self.assertFalse(self.installer.isProductInstalled(
-            'collective.restrictportlets'))
+        self.assertFalse(
+            self.installer.isProductInstalled('collective.restrictportlets')
+        )
 
     def test_browserlayer_removed(self):
         """Test that ICollectiveRestrictportletsLayer is removed."""
-        from collective.restrictportlets.interfaces import \
-            ICollectiveRestrictportletsLayer
+        from collective.restrictportlets.interfaces import (
+            ICollectiveRestrictportletsLayer,
+        )
         from plone.browserlayer import utils
-        self.assertNotIn(
-           ICollectiveRestrictportletsLayer,
-           utils.registered_layers())
+
+        self.assertNotIn(ICollectiveRestrictportletsLayer, utils.registered_layers())
 
     def test_member_sees_all_portlets_after_uninstall(self):
         # Explicitly set roles to Member. Somehow needed on Plone 4.3.

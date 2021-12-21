@@ -26,5 +26,5 @@ COLLECTIVE_RESTRICTPORTLETS_FIXTURE = CollectiveRestrictportletsLayer()
 
 COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING = IntegrationTesting(
     bases=(COLLECTIVE_RESTRICTPORTLETS_FIXTURE,),
-    name='CollectiveRestrictportletsLayer:IntegrationTesting'
+    name='CollectiveRestrictportletsLayer:IntegrationTesting',
 )

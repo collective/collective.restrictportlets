@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from collective.restrictportlets.interfaces import ISettings
 from collective.restrictportlets.interfaces import PortletTypesVocabularyFactory  # noqa
-from collective.restrictportlets.testing import COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING  # noqa
+from collective.restrictportlets.testing import (
+    COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING,
+)  # noqa
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -24,9 +26,8 @@ class TestPatch(unittest.TestCase):
 
     def test_default_setting(self):
         self.assertEqual(
-            api.portal.get_registry_record(
-                name='restricted', interface=ISettings),
-            ['portlets.Classic', 'portlets.Login']
+            api.portal.get_registry_record(name='restricted', interface=ISettings),
+            ['portlets.Classic', 'portlets.Login'],
         )
 
     def test_manager_sees_all_portlets(self):
@@ -55,8 +56,7 @@ class TestPatch(unittest.TestCase):
     def test_member_sees_different_portlets(self):
         # Test restricting different portlets than the default.
         api.portal.set_registry_record(
-            name='restricted', value=['portlets.News'],
-            interface=ISettings
+            name='restricted', value=['portlets.News'], interface=ISettings
         )
         setRoles(self.portal, TEST_USER_ID, ['Member'])
         addable = self.manager.getAddablePortletTypes()
@@ -81,13 +81,11 @@ class TestVocabulary(unittest.TestCase):
     def test_vocabulary_unknown_portlet(self):
         with self.assertRaises(WrongContainedType):
             api.portal.set_registry_record(
-                name='restricted', value=['no.such.portlet'],
-                interface=ISettings
+                name='restricted', value=['no.such.portlet'], interface=ISettings
             )
 
     def test_vocabulary_unicode_value(self):
         with self.assertRaises(WrongContainedType):
             api.portal.set_registry_record(
-                name='restricted', value=[u'plone.News'],
-                interface=ISettings
+                name='restricted', value=[u'plone.News'], interface=ISettings
             )
