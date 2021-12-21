@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a2 (unreleased)
+1.0.0 (2021-12-21)
 ------------------
 
 - Test on Plone 4.3, 5.1, 5.2, 6.0.  [maurits]
