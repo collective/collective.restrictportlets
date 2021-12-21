@@ -25,12 +25,12 @@ import tempfile
 
 from optparse import OptionParser
 
-__version__ = '2015-07-01'
+__version__ = "2015-07-01"
 # See zc.buildout's changelog if this version is up to date.
 
-tmpeggs = tempfile.mkdtemp(prefix='bootstrap-')
+tmpeggs = tempfile.mkdtemp(prefix="bootstrap-")
 
-usage = '''\
+usage = """\
 [DESIRED PYTHON FOR BUILDOUT] bootstrap.py [options]
 
 Bootstraps a buildout-based project.
@@ -40,7 +40,7 @@ Python that you want bin/buildout to use.
 
 Note that by using --find-links to point to local resources, you can keep
 this script from going over the network.
-'''
+"""
 
 parser = OptionParser(usage=usage)
 parser.add_option(
@@ -52,7 +52,7 @@ parser.add_option(
 parser.add_option(
     "-t",
     "--accept-buildout-test-releases",
-    dest='accept_buildout_test_releases',
+    dest="accept_buildout_test_releases",
     action="store_true",
     default=False,
     help=(
@@ -100,10 +100,10 @@ except ImportError:
     from urllib2 import urlopen
 
 ez = {}
-if os.path.exists('ez_setup.py'):
-    exec(open('ez_setup.py').read(), ez)
+if os.path.exists("ez_setup.py"):
+    exec(open("ez_setup.py").read(), ez)
 else:
-    exec(urlopen('https://bootstrap.pypa.io/ez_setup.py').read(), ez)
+    exec(urlopen("https://bootstrap.pypa.io/ez_setup.py").read(), ez)
 
 if not options.allow_site_packages:
     # ez_setup imports site, which adds site packages
@@ -113,7 +113,7 @@ if not options.allow_site_packages:
 
     # inside a virtualenv, there is no 'getsitepackages'.
     # We can't remove these reliably
-    if hasattr(site, 'getsitepackages'):
+    if hasattr(site, "getsitepackages"):
         for sitepackage_path in site.getsitepackages():
             # Strip all site-packages directories from sys.path that
             # are not sys.prefix; this is because on Windows
@@ -124,11 +124,11 @@ if not options.allow_site_packages:
 setup_args = dict(to_dir=tmpeggs, download_delay=0)
 
 if options.setuptools_version is not None:
-    setup_args['version'] = options.setuptools_version
+    setup_args["version"] = options.setuptools_version
 if options.setuptools_to_dir is not None:
-    setup_args['to_dir'] = options.setuptools_to_dir
+    setup_args["to_dir"] = options.setuptools_to_dir
 
-ez['use_setuptools'](**setup_args)
+ez["use_setuptools"](**setup_args)
 import setuptools
 import pkg_resources
 
@@ -143,37 +143,37 @@ for path in sys.path:
 
 ws = pkg_resources.working_set
 
-setuptools_path = ws.find(pkg_resources.Requirement.parse('setuptools')).location
+setuptools_path = ws.find(pkg_resources.Requirement.parse("setuptools")).location
 
 # Fix sys.path here as easy_install.pth added before PYTHONPATH
 cmd = [
     sys.executable,
-    '-c',
-    'import sys; sys.path[0:0] = [%r]; ' % setuptools_path
-    + 'from setuptools.command.easy_install import main; main()',
-    '-mZqNxd',
+    "-c",
+    "import sys; sys.path[0:0] = [%r]; " % setuptools_path
+    + "from setuptools.command.easy_install import main; main()",
+    "-mZqNxd",
     tmpeggs,
 ]
 
 find_links = os.environ.get(
-    'bootstrap-testing-find-links',
+    "bootstrap-testing-find-links",
     options.find_links
     or (
-        'http://downloads.buildout.org/'
+        "http://downloads.buildout.org/"
         if options.accept_buildout_test_releases
         else None
     ),
 )
 if find_links:
-    cmd.extend(['-f', find_links])
+    cmd.extend(["-f", find_links])
 
-requirement = 'zc.buildout'
+requirement = "zc.buildout"
 version = options.buildout_version
 if version is None and not options.accept_buildout_test_releases:
     # Figure out the most recent final version of zc.buildout.
     import setuptools.package_index
 
-    _final_parts = '*final-', '*final'
+    _final_parts = "*final-", "*final"
 
     def _final_version(parsed_version):
         try:
@@ -181,7 +181,7 @@ if version is None and not options.accept_buildout_test_releases:
         except AttributeError:
             # Older setuptools
             for part in parsed_version:
-                if (part[:1] == '*') and (part not in _final_parts):
+                if (part[:1] == "*") and (part not in _final_parts):
                     return False
             return True
 
@@ -204,7 +204,7 @@ if version is None and not options.accept_buildout_test_releases:
             best.sort()
             version = best[-1].version
 if version:
-    requirement = '=='.join((requirement, version))
+    requirement = "==".join((requirement, version))
 cmd.append(requirement)
 
 import subprocess
@@ -219,12 +219,12 @@ ws.add_entry(tmpeggs)
 ws.require(requirement)
 import zc.buildout.buildout
 
-if not [a for a in args if '=' not in a]:
-    args.append('bootstrap')
+if not [a for a in args if "=" not in a]:
+    args.append("bootstrap")
 
 # if -c was provided, we push it back into args for buildout' main function
 if options.config_file is not None:
-    args[0:0] = ['-c', options.config_file]
+    args[0:0] = ["-c", options.config_file]
 
 zc.buildout.buildout.main(args)
 shutil.rmtree(tmpeggs)

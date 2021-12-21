@@ -13,4 +13,4 @@ class ControlPanelForm(RegistryEditForm):
 
 
 ControlPanelView = layout.wrap_form(ControlPanelForm, ControlPanelFormWrapper)
-ControlPanelView.label = _(u'Restrict portlets')
+ControlPanelView.label = _(u"Restrict portlets")

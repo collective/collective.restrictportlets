@@ -18,7 +18,7 @@ class CollectiveRestrictportletsLayer(PloneSandboxLayer):
         self.loadZCML(package=collective.restrictportlets)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'collective.restrictportlets:default')
+        applyProfile(portal, "collective.restrictportlets:default")
 
 
 COLLECTIVE_RESTRICTPORTLETS_FIXTURE = CollectiveRestrictportletsLayer()
@@ -26,5 +26,5 @@ COLLECTIVE_RESTRICTPORTLETS_FIXTURE = CollectiveRestrictportletsLayer()
 
 COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING = IntegrationTesting(
     bases=(COLLECTIVE_RESTRICTPORTLETS_FIXTURE,),
-    name='CollectiveRestrictportletsLayer:IntegrationTesting',
+    name="CollectiveRestrictportletsLayer:IntegrationTesting",
 )

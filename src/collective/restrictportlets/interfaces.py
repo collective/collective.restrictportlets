@@ -37,21 +37,21 @@ class ISettings(Interface):
     """Settings for restricted portlets"""
 
     restricted = schema.List(
-        title=_(u'Restricted portlets'),
+        title=_(u"Restricted portlets"),
         description=_(
-            u'description_restricted_portlets',
-            default=u'Select portlets that are hidden from normal users in '
-            u'the manage portlets drop down menu. Restricted portlets '
-            u'are still available for Managers. Please note this is '
-            u'not a security feature, it only unclutters the add '
-            u'portlet menu. No permission checks are done: users who '
-            u'know the exact url to the portlet add form can still '
-            u'add restricted portlets. Normal users can also edit '
-            u'restricted portlets already created in the site.',
+            u"description_restricted_portlets",
+            default=u"Select portlets that are hidden from normal users in "
+            u"the manage portlets drop down menu. Restricted portlets "
+            u"are still available for Managers. Please note this is "
+            u"not a security feature, it only unclutters the add "
+            u"portlet menu. No permission checks are done: users who "
+            u"know the exact url to the portlet add form can still "
+            u"add restricted portlets. Normal users can also edit "
+            u"restricted portlets already created in the site.",
         ),
         value_type=schema.Choice(
-            title=u'Portlet name',
-            vocabulary='collective.restrictportlets.portlet_types',
+            title=u"Portlet name",
+            vocabulary="collective.restrictportlets.portlet_types",
         ),
-        default=['portlets.Classic', 'portlets.Login'],
+        default=["portlets.Classic", "portlets.Login"],
     )

@@ -19,13 +19,13 @@ class TestSetup(unittest.TestCase):
 
     def setUp(self):
         """Custom shared utility setup for tests."""
-        self.portal = self.layer['portal']
-        self.installer = api.portal.get_tool('portal_quickinstaller')
+        self.portal = self.layer["portal"]
+        self.installer = api.portal.get_tool("portal_quickinstaller")
 
     def test_product_installed(self):
         """Test if collective.restrictportlets is installed."""
         self.assertTrue(
-            self.installer.isProductInstalled('collective.restrictportlets')
+            self.installer.isProductInstalled("collective.restrictportlets")
         )
 
     def test_browserlayer(self):
@@ -43,14 +43,14 @@ class TestUninstall(unittest.TestCase):
     layer = COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        self.installer = api.portal.get_tool('portal_quickinstaller')
-        self.installer.uninstallProducts(['collective.restrictportlets'])
+        self.portal = self.layer["portal"]
+        self.installer = api.portal.get_tool("portal_quickinstaller")
+        self.installer.uninstallProducts(["collective.restrictportlets"])
 
     def test_product_uninstalled(self):
         """Test if collective.restrictportlets is cleanly uninstalled."""
         self.assertFalse(
-            self.installer.isProductInstalled('collective.restrictportlets')
+            self.installer.isProductInstalled("collective.restrictportlets")
         )
 
     def test_browserlayer_removed(self):
@@ -64,11 +64,11 @@ class TestUninstall(unittest.TestCase):
 
     def test_member_sees_all_portlets_after_uninstall(self):
         # Explicitly set roles to Member. Somehow needed on Plone 4.3.
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
-        manager = getUtility(IPortletManager, name='plone.leftcolumn')
+        setRoles(self.portal, TEST_USER_ID, ["Member"])
+        manager = getUtility(IPortletManager, name="plone.leftcolumn")
         addable = manager.getAddablePortletTypes()
         add_views = [p.addview for p in addable]
-        self.assertIn('portlets.News', add_views)
-        self.assertIn('portlets.Classic', add_views)
-        self.assertIn('portlets.Login', add_views)
-        self.assertIn('plone.portlet.static.Static', add_views)
+        self.assertIn("portlets.News", add_views)
+        self.assertIn("portlets.Classic", add_views)
+        self.assertIn("portlets.Login", add_views)
+        self.assertIn("plone.portlet.static.Static", add_views)
