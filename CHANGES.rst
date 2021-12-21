@@ -5,7 +5,7 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
-- Test on Plone 4.3-6.0.  [maurits]
+- Test on Plone 4.3, 5.1, 5.2, 6.0.  [maurits]
 
 - Switch to tox and GitHub Actions.  [maurits]
 
