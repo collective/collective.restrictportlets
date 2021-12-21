@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
+from collective.restrictportlets import testing
 from collective.restrictportlets.interfaces import ISettings
 from collective.restrictportlets.interfaces import PortletTypesVocabularyFactory  # noqa
-from collective.restrictportlets.testing import (
-    COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING,
-)  # noqa
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -17,7 +15,7 @@ import unittest
 class TestPatch(unittest.TestCase):
     """Test that our patch works."""
 
-    layer = COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING
+    layer = testing.COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING
 
     def setUp(self):
         """Custom shared utility setup for tests."""
@@ -69,7 +67,7 @@ class TestPatch(unittest.TestCase):
 
 class TestVocabulary(unittest.TestCase):
 
-    layer = COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING
+    layer = testing.COLLECTIVE_RESTRICTPORTLETS_INTEGRATION_TESTING
 
     def test_vocabulary_values(self):
         values = PortletTypesVocabularyFactory(context=None)
