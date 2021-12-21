@@ -8,7 +8,10 @@
 
   <i18n:registerTranslations directory="locales" />
 
-  <includeDependencies package="." />
+  <include package="collective.monkeypatcher" file="meta.zcml" />
+  <include package="Products.GenericSetup" file="meta.zcml" />
+  <include package="Products.GenericSetup" />
+  <include package="plone.app.registry" />
 
   <utility
     component=".interfaces.PortletTypesVocabularyFactory"
